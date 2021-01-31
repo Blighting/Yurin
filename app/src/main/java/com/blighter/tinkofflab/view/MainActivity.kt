@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import com.blighter.tinkofflab.R
 import com.blighter.tinkofflab.databinding.ActivityMainBinding
 import com.blighter.tinkofflab.viewModel.RandomGifViewModel
+
 class MainActivity : AppCompatActivity() {
     val viewModel: RandomGifViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {

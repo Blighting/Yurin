@@ -38,7 +38,8 @@ class GifRepository(private val context: Context) {
             database.gifDao().getGifById(id)
         }
     }
-    suspend fun deleteDatabase(){
+
+    suspend fun deleteDatabase() {
         GlobalScope.launch {
             withContext(Dispatchers.IO) {
                 database.clearAllTables()
