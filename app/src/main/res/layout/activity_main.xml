@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.blighter.tinkofflab.viewModel.RandomGifViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar_title"
+            layout="@layout/toolbar" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/main_body"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/defaultMargin"
+            app:layout_constraintBottom_toTopOf="@+id/buttons"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView"
+                app:layout_constraintStart_toStartOf="@+id/textView">
+
+                <ImageView
+                    android:scaleType="centerCrop"
+                    android:id="@+id/gif"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:contentDescription="Image"
+                    app:layout_constraintBottom_toTopOf="@+id/gif_description"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.8"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:isError="@{viewmodel.isError}"
+                    app:gifURL="@{viewmodel.gifURL}"
+                    app:isVisible="@{viewmodel.isVisible}"/>
+
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:id="@+id/gif_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:text="@{viewmodel.description}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/gif" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/buttons"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/main_body">
+
+
+            <ImageButton
+                android:id="@+id/button_backward"
+                android:layout_width="80dp"
+                android:layout_height="70dp"
+                android:layout_marginEnd="24dp"
+                android:background="@null"
+                android:contentDescription="TODO"
+                android:elevation="10dp"
+                app:previousGifs="@{viewmodel.previousCount}"
+                android:onClick="@{() -> viewmodel.onBack()}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/button_forward"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/arrow_back_enabled" />
+
+            <ImageButton
+                android:id="@+id/button_forward"
+                android:layout_width="80dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="24dp"
+                android:background="@null"
+                android:clickable="@{viewmodel.isVisible()}"
+                android:contentDescription="TODO"
+                android:onClick="@{() -> viewmodel.onNext()}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/button_backward"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/arrow_forward"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
